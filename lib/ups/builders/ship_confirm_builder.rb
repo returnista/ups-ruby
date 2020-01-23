@@ -54,6 +54,12 @@ module UPS
                                           service_description)
       end
 
+      def add_return_service(service_code)
+        shipment_root << code('ReturnService',
+                              element_with_value('Code', service_code))
+      end
+
+
       # Adds Description to XML document being built
       #
       # @param [String] description The description for goods being sent
