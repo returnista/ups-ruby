@@ -55,8 +55,9 @@ module UPS
       end
 
       def add_return_service(service_code)
-        shipment_root << element_with_value('ReturnService',
-                              element_with_value('Code', service_code))
+        shipment_root << Element.new('ReturnService').tap do |return_service|
+          return_service << element_with_value('Code', service_code)
+        end
       end
 
 
