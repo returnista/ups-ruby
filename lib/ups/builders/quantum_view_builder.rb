@@ -27,6 +27,15 @@ module UPS
           request << element_with_value('RequestAction', action)
         end
       end
+
+      private
+
+      def initialize_xml_roots(root_name)
+        self.document = Document.new
+        self.root = Element.new(root_name)
+        self.access_request = Element.new('AccessRequest')
+        root << shipment_root
+      end
     end
   end
 end
