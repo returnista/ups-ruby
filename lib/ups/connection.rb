@@ -21,7 +21,7 @@ module UPS
     SHIP_CONFIRM_PATH = '/ups.app/xml/ShipConfirm'
     SHIP_ACCEPT_PATH = '/ups.app/xml/ShipAccept'
     ADDRESS_PATH = '/ups.app/xml/XAV'
-    QUANTUM_VIEW_PATH = '/ups.app/xml/QuantumView'
+    QUANTUM_VIEW_PATH = '/ups.app/xml/QVEvents'
 
     DEFAULT_PARAMS = {
       test_mode: false
