@@ -27,6 +27,7 @@ module UPS
     autoload :RateParser,          'ups/parsers/rate_parser'
     autoload :ShipConfirmParser,   'ups/parsers/ship_confirm_parser'
     autoload :ShipAcceptParser,    'ups/parsers/ship_accept_parser'
+    autoload :QuantumViewParser,   'ups/parsers/quantum_view_parser'
   end
 
   module Builders
