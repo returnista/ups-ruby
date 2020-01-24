@@ -80,12 +80,22 @@ module UPS
       make_accept_request(accept_builder)
     end
 
+    # Makes a request to get quantum view
+    #
+    # A pre-configured {Builders::QuantumViewBuilder} object can be passed as
+    # the first option or a block yielded to configure a new
+    # {Builders::QuantumViewBuilder} object.
+    #
+    # @param [Builders::QuantumViewBuilder] confirm_builder A pre-configured
+    #   {Builders::QuantumViewBuilder} object to use
+    # @yield [quantum_view_builder] A QuantumViewBuilder object for configuring
+    #   the shipment information sent
     def track(tracking_builder = nil)
       if tracking_builder.nil? && block_given?
         tracking_builder = Builders::QuantumViewBuilder.new
         yield tracking_builder
       end
-
+      ap tracking_builder.to_s
       make_tracking_request(tracking_builder)
     end
 
