@@ -73,6 +73,7 @@ module UPS
         yield confirm_builder
       end
 
+      ap confirm_builder.to_xml
       confirm_response = make_confirm_request(confirm_builder)
       return confirm_response unless confirm_response.success?
 
