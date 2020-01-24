@@ -54,6 +54,12 @@ module UPS
                                           service_description)
       end
 
+      # Adds a Return Service section to the XML document being built
+      #
+      # @param [String] service_code The Return Service code for the chosen Shipping
+      #   method
+      #
+      # @return [void]
       def add_return_service(service_code)
         shipment_root << Element.new('ReturnService').tap do |return_service|
           return_service << element_with_value('Code', service_code)

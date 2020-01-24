@@ -21,6 +21,7 @@ module UPS
     SHIP_CONFIRM_PATH = '/ups.app/xml/ShipConfirm'
     SHIP_ACCEPT_PATH = '/ups.app/xml/ShipAccept'
     ADDRESS_PATH = '/ups.app/xml/XAV'
+    QUANTUM_VIEW_PATH = '/ups.app/xml/QuantumView'
 
     DEFAULT_PARAMS = {
       test_mode: false
@@ -79,6 +80,15 @@ module UPS
       make_accept_request(accept_builder)
     end
 
+    def track(tracking_builder = nil)
+      if tracking_builder.nil? && block_given?
+        tracking_builder = Builders::QuantumViewBuilder.new
+        yield tracking_builder
+      end
+
+      make_tracking_request(tracking_builder)
+    end
+
     private
 
     def build_url(path)
@@ -95,6 +105,10 @@ module UPS
 
     def make_accept_request(accept_builder)
       make_ship_request(accept_builder, SHIP_ACCEPT_PATH, Parsers::ShipAcceptParser)
+    end
+
+    def make_tracking_request(tracking_builder)
+      make_ship_request(tracking_builder, QUANTUM_VIEW_PATH, Parsers::QuantumViewParser)
     end
 
     def make_ship_request(builder, path, ship_parser)
