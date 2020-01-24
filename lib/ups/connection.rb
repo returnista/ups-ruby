@@ -95,7 +95,7 @@ module UPS
         tracking_builder = Builders::QuantumViewBuilder.new
         yield tracking_builder
       end
-      ap tracking_builder.to_s
+      ap tracking_builder.to_xml
       make_tracking_request(tracking_builder)
     end
 
