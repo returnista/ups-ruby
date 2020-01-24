@@ -34,7 +34,6 @@ module UPS
         self.document = Document.new
         self.root = Element.new(root_name)
         self.access_request = Element.new('AccessRequest')
-        root << shipment_root
       end
     end
   end
