@@ -6,8 +6,7 @@ module UPS
   module Parsers
     class QuantumViewParser < BaseParser
       def quantum_view_events
-        xml =  root_response[:QuantumViewEvents]
-        Ox.load(xml, mode: :hash)
+        root_response[:QuantumViewEvents]
       end
 
       private
