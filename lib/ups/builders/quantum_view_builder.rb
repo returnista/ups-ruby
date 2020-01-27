@@ -11,6 +11,8 @@ module UPS
     class QuantumViewBuilder < BuilderBase
       include Ox
 
+      attr_accessor :access_doc, :main_doc
+
       # Initializes a new {QuantumViewBuilder} object
       def initialize
         super 'QuantumViewRequest'
@@ -28,19 +30,31 @@ module UPS
         end
       end
 
+      def to_xml
+        [access_doc.to_xml, main_doc.to_xml].join
+      end
+
       private
 
       def initialize_xml_roots(root_name)
         instruct = Instruct.new(:xml)
         instruct[:version] = '1.0'
 
-        self.document = Document.new
+        self.access_doc = Document.new
+        access_doc << instruct
+        access_doc << Element.new('AccessRequest')
 
-        self.root = Element.new(root_name)
-        self.root << instruct
+        self.main_doc = Document.new
+        main_doc << instruct
+        main_doc << Element.new(root_name)
 
-        self.access_request = Element.new('AccessRequest')
-        self.access_request << instruct
+        # self.document = Document.new
+
+        # self.root = Element.new(root_name)
+        # self.root << instruct
+
+        # self.access_request = Element.new('AccessRequest')
+        # self.access_request << instruct
       end
     end
   end
