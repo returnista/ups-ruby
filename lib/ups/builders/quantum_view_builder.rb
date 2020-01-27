@@ -14,7 +14,7 @@ module UPS
       attr_accessor :access_doc, :main_doc
 
       # Initializes a new {QuantumViewBuilder} object
-      def initialize(root_name)
+      def initialize
         instruct = Instruct.new(:xml)
         instruct[:version] = '1.0'
 
@@ -27,7 +27,7 @@ module UPS
 
         self.main_doc = Document.new
         main_doc << instruct
-        self.main_root = Element.new(root_name)
+        self.main_root = Element.new('QuantumViewRequest')
 
         yield self if block_given?
 
