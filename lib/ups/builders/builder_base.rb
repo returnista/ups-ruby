@@ -8,7 +8,7 @@ module UPS
     # @since 0.1.0
     # @abstract
     # @attr [Ox::Document] document The XML Document being built
-    # @attr [Ox::Element] root The XML Root
+    # @attr [Ox::Element] main_root The XML Root
     # @attr [Ox::Element] shipment_root The XML Shipment Element
     # @attr [Ox::Element] access_request The XML AccessRequest Element
     # @attr [String] license_number The UPS API Key
@@ -19,7 +19,7 @@ module UPS
       include Exceptions
 
       attr_accessor :document,
-                    :root,
+                    :main_root,
                     :shipment_root,
                     :access_request,
                     :license_number,
@@ -34,7 +34,7 @@ module UPS
         initialize_xml_roots root_name
 
         document << access_request
-        document << root
+        document << main_root
 
         yield self if block_given?
       end
@@ -70,7 +70,7 @@ module UPS
       # @param [String] option The UPS API Option
       # @return [void]
       def add_request(action, option)
-        root << Element.new('Request').tap do |request|
+        main_root << Element.new('Request').tap do |request|
           request << element_with_value('RequestAction', action)
           request << element_with_value('RequestOption', option)
         end
@@ -197,10 +197,10 @@ module UPS
 
       def initialize_xml_roots(root_name)
         self.document = Document.new
-        self.root = Element.new(root_name)
+        self.main_root = Element.new(root_name)
         self.shipment_root = Element.new('Shipment')
         self.access_request = Element.new('AccessRequest')
-        root << shipment_root
+        main_root << shipment_root
       end
 
       def shipment_service_options
