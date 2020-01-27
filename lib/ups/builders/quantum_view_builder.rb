@@ -20,10 +20,7 @@ module UPS
 
         self.access_doc = Document.new
         access_doc << instruct
-        access_root = Element.new('AccessRequest').tap do |request|
-          request << access_request
-        end
-        access_doc << access_root
+        self.access_request = Element.new('AccessRequest')
 
         self.main_doc = Document.new
         main_doc << instruct
@@ -31,8 +28,14 @@ module UPS
 
         yield self if block_given?
 
-        add_request(action)
+        add_request('QVEvents')
       end
+
+      def to_xml
+        [access_doc.to_xml, main_doc.to_xml].join
+      end
+
+      private
 
       # Adds a Request section to the XML document being built
       #
@@ -44,9 +47,6 @@ module UPS
         end
       end
 
-      def to_xml
-        [access_doc.to_xml, main_doc.to_xml].join
-      end
     end
   end
 end
