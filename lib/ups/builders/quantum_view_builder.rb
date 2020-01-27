@@ -15,7 +15,9 @@ module UPS
 
       # Initializes a new {QuantumViewBuilder} object
       def initialize
-        super 'QuantumViewRequest'
+        initialize_xml_roots 'QuantumViewRequest'
+
+        yield self if block_given?
 
         add_request 'QVEvents'
       end
@@ -25,7 +27,7 @@ module UPS
       # @param [String] action The UPS API Action requested
       # @return [void]
       def add_request(action)
-        root << Element.new('Request').tap do |request|
+        main_doc << Element.new('Request').tap do |request|
           request << element_with_value('RequestAction', action)
         end
       end
