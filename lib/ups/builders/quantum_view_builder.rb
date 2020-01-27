@@ -39,7 +39,6 @@ module UPS
         self.document << instruct
         self.root = Element.new(root_name)
 
-        self.document << instruct
         self.access_request = Element.new('AccessRequest')
       end
     end
