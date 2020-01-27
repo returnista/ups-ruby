@@ -10,7 +10,7 @@ module UPS
       end
 
       def record_to_file
-        File.open('quantum_view.json', 'wb') { |file| file.write(Ox.load(response, mode: :object))}
+        File.open('quantum_view.json', 'wb') { |file| file.write(quantum_view_events.to_json)}
       end
 
       private
