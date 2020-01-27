@@ -21,10 +21,12 @@ module UPS
         self.access_doc = Document.new
         access_doc << instruct
         self.access_request = Element.new('AccessRequest')
+        access_doc << access_request
 
         self.main_doc = Document.new
         main_doc << instruct
         self.main_root = Element.new('QuantumViewRequest')
+        main_doc << main_root
 
         yield self if block_given?
 
@@ -46,7 +48,6 @@ module UPS
           request << element_with_value('RequestAction', action)
         end
       end
-
     end
   end
 end
