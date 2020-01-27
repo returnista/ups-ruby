@@ -98,10 +98,6 @@ module UPS
         yield tracking_builder
       end
 
-      ap tracking_builder.to_xml
-
-      File.open('track.xml', 'w') { |file| file.write(tracking_builder.to_xml) }
-
       make_tracking_request(tracking_builder)
     end
 
