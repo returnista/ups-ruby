@@ -31,8 +31,15 @@ module UPS
       private
 
       def initialize_xml_roots(root_name)
+        instruct = Instruct.new(:xml)
+        instruct[:version] = '1.0'
+
         self.document = Document.new
+
+        self.document << instruct
         self.root = Element.new(root_name)
+
+        self.document << instruct
         self.access_request = Element.new('AccessRequest')
       end
     end
