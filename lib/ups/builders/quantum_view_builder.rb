@@ -32,7 +32,7 @@ module UPS
       end
 
       def to_xml
-        [access_doc.to_xml, main_doc.to_xml].join
+        [Ox.to_xml access_doc, Ox.to_xml main_doc].join
       end
 
       private
