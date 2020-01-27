@@ -9,6 +9,10 @@ module UPS
         root_response[:QuantumViewEvents]
       end
 
+      def record_to_file
+        File.open('quantum_view.json', 'wb') { |file| file.write(Ox.load(response, mode: :object))}
+      end
+
       private
 
       def root_response
